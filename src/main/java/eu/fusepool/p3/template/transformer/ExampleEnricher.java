@@ -31,7 +31,8 @@ public class ExampleEnricher {
      * Takes an input RDF data and a URL of a data set to be used for the enrichment of the input data.  
      * @throws Exception 
      */
-    public void enrich(TripleCollection dataGraph, TripleCollection clientGraph) throws Exception {
+    public TripleCollection enrich(TripleCollection dataGraph, TripleCollection clientGraph) throws Exception {
+    	TripleCollection enrichmentsGraph = new SimpleMGraph();
         //Example enrichment: extracts a comment about res1 in the data graph
     	//then adds the comment about res1 in the client graph
         UriRef res1 = new UriRef("http://example.org/res1");
@@ -39,8 +40,10 @@ public class ExampleEnricher {
 	        Iterator<Triple> dataIter = dataGraph.filter(res1, RDFS.comment, null);
 	        String comment = dataIter.next().getObject().toString();	
 	        log.info("A comment found about <http://example.org/res1>: " + comment );
-	        clientGraph.add( new TripleImpl( res1, RDFS.comment, new PlainLiteralImpl(comment)) );
+	        enrichmentsGraph.add( new TripleImpl( res1, RDFS.comment, new PlainLiteralImpl(comment)) );
         }
+        
+        return enrichmentsGraph;
         
     }
     

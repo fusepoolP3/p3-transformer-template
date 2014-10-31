@@ -72,9 +72,13 @@ class TemplateTransformer extends RdfGeneratingTransformer {
      */
     @Override
     protected TripleCollection generateRdf(HttpRequestEntity entity) throws IOException {
+    	TripleCollection resultGraph = new SimpleMGraph();
         String mediaType = entity.getType().toString();   
         Parser parser = Parser.getInstance();
         TripleCollection clientGraph = parser.parse( entity.getData(), mediaType);
+        
+        // add the client data to the result graph
+        resultGraph.addAll(clientGraph);
         
         // graph containing the data feched by the url if provided.
         TripleCollection dataGraph = null;
@@ -88,7 +92,7 @@ class TemplateTransformer extends RdfGeneratingTransformer {
     		// enrich the client data using the data fetched from the url
             try {
             	
-            	exampleEnricher.enrich(dataGraph, clientGraph);    
+            	resultGraph.addAll(exampleEnricher.enrich(dataGraph, clientGraph));    
                 
             } catch (Exception e) {
                 // TODO Auto-generated catch block
@@ -98,7 +102,7 @@ class TemplateTransformer extends RdfGeneratingTransformer {
     	}
     	
         
-        return clientGraph;
+        return resultGraph;
         
     }
     
