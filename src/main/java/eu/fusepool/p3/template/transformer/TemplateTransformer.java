@@ -90,14 +90,7 @@ class TemplateTransformer extends RdfGeneratingTransformer {
     		
     		dataGraph = fetchDataFromUrl(dataUrl);
     		// enrich the client data using the data fetched from the url
-            try {
-            	
-            	resultGraph.addAll(exampleEnricher.enrich(dataGraph, clientGraph));    
-                
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            resultGraph.addAll(exampleEnricher.enrich(dataGraph, clientGraph));    
     		
     	}
     	

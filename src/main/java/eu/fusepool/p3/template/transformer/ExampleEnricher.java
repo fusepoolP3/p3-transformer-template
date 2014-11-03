@@ -5,6 +5,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Iterator;
 
+import org.apache.clerezza.rdf.core.Literal;
 import org.apache.clerezza.rdf.core.NonLiteral;
 import org.apache.clerezza.rdf.core.Triple;
 import org.apache.clerezza.rdf.core.TripleCollection;
@@ -31,14 +32,14 @@ public class ExampleEnricher {
      * Takes an input RDF data and a URL of a data set to be used for the enrichment of the input data.  
      * @throws Exception 
      */
-    public TripleCollection enrich(TripleCollection dataGraph, TripleCollection clientGraph) throws Exception {
+    public TripleCollection enrich(TripleCollection dataGraph, TripleCollection clientGraph) {
     	TripleCollection enrichmentsGraph = new SimpleMGraph();
         //Example enrichment: extracts a comment about res1 in the data graph
     	//then adds the comment about res1 in the client graph
         UriRef res1 = new UriRef("http://example.org/res1");
         if (dataGraph != null) {
 	        Iterator<Triple> dataIter = dataGraph.filter(res1, RDFS.comment, null);
-	        String comment = dataIter.next().getObject().toString();	
+	        String comment = ((PlainLiteralImpl)dataIter.next().getObject()).getLexicalForm();	
 	        log.info("A comment found about <http://example.org/res1>: " + comment );
 	        enrichmentsGraph.add( new TripleImpl( res1, RDFS.comment, new PlainLiteralImpl(comment)) );
         }

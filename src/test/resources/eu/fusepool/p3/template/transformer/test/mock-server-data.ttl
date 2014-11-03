@@ -6,6 +6,7 @@
 
 
 <http://example.org/res1> rdf:type schema:LocalBusiness ;
+        rdfs:label "Res1" ;
         rdfs:comment "This is a comment about res1." . 
 
 

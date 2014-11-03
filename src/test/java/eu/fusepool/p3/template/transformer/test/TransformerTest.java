@@ -98,7 +98,7 @@ public class TransformerTest {
 	@Rule
     public WireMockRule wireMockRule = new WireMockRule(mockPort);
     
-    //@Test
+    @Test
     public void testTurtleSupported()  throws MimeTypeParseException {
         Transformer t = new TransformerClientImpl(RestAssured.baseURI);
         Set<MimeType> types = t.getSupportedInputFormats();
@@ -114,7 +114,8 @@ public class TransformerTest {
         
 
     /**
-     * The transformer receives data and a url from the client, fetches the data set from the url and applies a transformation.
+     * The transformer receives data and a url from the client, fetches the data set from the url, applies a transformation
+     * and then check if the transformation is in the result graph.
      * @throws Exception
      */
 	@Test
@@ -156,13 +157,14 @@ public class TransformerTest {
 
             // the client receives the response from the transformer
             Assert.assertEquals("Wrong media Type of response", mockDataMimeType.toString(), response.getType().toString());            
+            /*
             InputStream in = response.getData();
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
             while((line = reader.readLine()) != null){
                 System.out.println(line);
             }
-            
+            */
             final Graph responseGraph = Parser.getInstance().parse(response.getData(), "text/turtle");
             //checks for the presence of a specific property added by the transformer
             final Iterator<Triple> propertyIter = responseGraph.filter(res1, RDFS.comment, null);
