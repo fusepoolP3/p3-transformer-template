@@ -93,7 +93,7 @@ class TemplateTransformer extends RdfGeneratingTransformer {
                 resultGraph.addAll(exampleEnricher.enrich(dataGraph, clientGraph));    
      		}
      		else {
-     			throw new RuntimeException("Failed to transform the events source data.");
+     			throw new RuntimeException("Failed to transform the source data.");
      		}
     		
     	}
