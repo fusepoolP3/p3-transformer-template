@@ -88,7 +88,7 @@ class TemplateTransformer extends RdfGeneratingTransformer {
     	// The data url must be specified as a query parameter
     	log.info("Data Url : " + dataUrl);
     	if(dataUrl != null){
-    		if( (dataGraph = fetchDataFromUrl(dataUrl, DATA_MIME_TYPE) ) != null ){
+    		if( (dataGraph = fetchDataFromUrl(dataUrl) ) != null ){
     			// enrich the client data using the data fetched from the url
                 resultGraph.addAll(exampleEnricher.enrich(dataGraph, clientGraph));    
      		}
@@ -110,7 +110,7 @@ class TemplateTransformer extends RdfGeneratingTransformer {
      * @return
      * @throws IOException
      */
-    private TripleCollection fetchDataFromUrl(String dataUrl, String dataMimeType)throws IOException {
+    private TripleCollection fetchDataFromUrl(String dataUrl)throws IOException {
     	
         URL sourceUrl = new URL(dataUrl);
         URLConnection connection = sourceUrl.openConnection();
