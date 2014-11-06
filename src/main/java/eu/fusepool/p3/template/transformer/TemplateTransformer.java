@@ -40,6 +40,7 @@ import eu.fusepool.p3.transformer.RdfGeneratingTransformer;
  */
 class TemplateTransformer extends RdfGeneratingTransformer {
 
+	final static String DATA_MIME_TYPE = "text/turtle"; //MIME type of the data fetched from the url
 	public static final String DATA_QUERY_PARAM = "data";
 	
     private static final Logger log = LoggerFactory.getLogger(TemplateTransformer.class);
@@ -87,10 +88,13 @@ class TemplateTransformer extends RdfGeneratingTransformer {
     	// The data url must be specified as a query parameter
     	log.info("Data Url : " + dataUrl);
     	if(dataUrl != null){
-    		
-    		dataGraph = fetchDataFromUrl(dataUrl);
-    		// enrich the client data using the data fetched from the url
-            resultGraph.addAll(exampleEnricher.enrich(dataGraph, clientGraph));    
+    		if( (dataGraph = fetchDataFromUrl(dataUrl, DATA_MIME_TYPE) ) != null ){
+    			// enrich the client data using the data fetched from the url
+                resultGraph.addAll(exampleEnricher.enrich(dataGraph, clientGraph));    
+     		}
+     		else {
+     			throw new RuntimeException("Failed to transform the events source data.");
+     		}
     		
     	}
     	
@@ -106,14 +110,13 @@ class TemplateTransformer extends RdfGeneratingTransformer {
      * @return
      * @throws IOException
      */
-    private TripleCollection fetchDataFromUrl(String dataUrl)throws IOException {
+    private TripleCollection fetchDataFromUrl(String dataUrl, String dataMimeType)throws IOException {
     	
         URL sourceUrl = new URL(dataUrl);
         URLConnection connection = sourceUrl.openConnection();
         InputStream in =  connection.getInputStream();
         
         return Parser.getInstance().parse(in, "text/turtle");
-        
         
     	
     }

@@ -56,12 +56,12 @@ public class TransformerTest {
 	
 	// data used by the mock server
 	final String MOCK_SERVER_DATA = "mock-server-data.ttl";
-	final static String MOCK_SERVER_DATA_MIME_TYPE = "text/turtle";
+	final static String TRANSFORMER_MIME_TYPE = "text/turtle"; // MIME type of data returned by the transformer (a RDF serialization)	
 	
-    private static MimeType mockDataMimeType;
+    private static MimeType transformerMimeType;
     static {
         try {
-        	mockDataMimeType = new MimeType(MOCK_SERVER_DATA_MIME_TYPE);
+        	transformerMimeType = new MimeType(TRANSFORMER_MIME_TYPE);
         } catch (MimeTypeParseException ex) {
             Logger.getLogger(TransformerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,7 +105,7 @@ public class TransformerTest {
         Assert.assertTrue("No supported Output format", types.size() > 0);
         boolean turtleFound = false;
         for (MimeType mimeType : types) {
-            if (mockDataMimeType.match(mimeType)) {
+            if (transformerMimeType.match(mimeType)) {
                 turtleFound = true;
             }
         }
@@ -146,17 +146,17 @@ public class TransformerTest {
 
                 @Override
                 public MimeType getType() {
-                    return mockDataMimeType;
+                    return transformerMimeType;
                 }
 
                 @Override
                 public void writeData(OutputStream out) throws IOException {
                     out.write(ttlData);
                 }
-            }, mockDataMimeType);
+            }, transformerMimeType);
 
             // the client receives the response from the transformer
-            Assert.assertEquals("Wrong media Type of response", mockDataMimeType.toString(), response.getType().toString());            
+            Assert.assertEquals("Wrong media Type of response", transformerMimeType.toString(), response.getType().toString());            
             /*
             InputStream in = response.getData();
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
