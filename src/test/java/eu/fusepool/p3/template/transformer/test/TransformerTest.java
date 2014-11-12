@@ -56,12 +56,15 @@ public class TransformerTest {
 	
 	// data used by the mock server
 	final String MOCK_SERVER_DATA = "mock-server-data.ttl";
+	public static final String DATA_MIME_TYPE = "text/turtle"; //MIME type of the data fetched from the url provided by the client
 	final static String TRANSFORMER_MIME_TYPE = "text/turtle"; // MIME type of data returned by the transformer (a RDF serialization)	
 	
     private static MimeType transformerMimeType;
+    private static MimeType dataMimeType;
     static {
         try {
         	transformerMimeType = new MimeType(TRANSFORMER_MIME_TYPE);
+        	dataMimeType = new MimeType(DATA_MIME_TYPE);
         } catch (MimeTypeParseException ex) {
             Logger.getLogger(TransformerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -146,7 +149,7 @@ public class TransformerTest {
 
                 @Override
                 public MimeType getType() {
-                    return transformerMimeType;
+                    return dataMimeType;
                 }
 
                 @Override
