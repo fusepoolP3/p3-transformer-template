@@ -21,7 +21,7 @@ In order to test the transformer the client data will be used locally and the ad
 project Github repository. The url of the remote source must be sent as a query parameter with 'data' as the parameter name.
 From the src/test/resource folder run the following command 
 
-    curl -i -X POST -H "Content-Type: text/turtle" -T client-data.ttl http://localhost:7001?data=https://raw.githubusercontent.com/fusepoolP3/p3-template-transformer/master/src/test/resources/eu/fusepool/p3/template/transformer/test/client-data.ttl  
+    curl -i -X POST -H "Content-Type: text/turtle" -T client-data.ttl http://localhost:7001?data=https://raw.githubusercontent.com/fusepoolP3/p3-template-transformer/master/src/test/resources/eu/fusepool/p3/template/transformer/test/mock-server-data.ttl  
  
 The command starts an asynchronous task and the server sends a response with the location header where the result will be made 
 available to the client.
