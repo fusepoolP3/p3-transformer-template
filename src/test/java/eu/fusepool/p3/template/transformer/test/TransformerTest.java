@@ -160,14 +160,7 @@ public class TransformerTest {
 
             // the client receives the response from the transformer
             Assert.assertEquals("Wrong media Type of response", transformerMimeType.toString(), response.getType().toString());            
-            /*
-            InputStream in = response.getData();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while((line = reader.readLine()) != null){
-                System.out.println(line);
-            }
-            */
+            
             final Graph responseGraph = Parser.getInstance().parse(response.getData(), "text/turtle");
             //checks for the presence of a specific property added by the transformer
             final Iterator<Triple> propertyIter = responseGraph.filter(res1, RDFS.comment, null);
