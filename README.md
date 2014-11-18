@@ -25,3 +25,5 @@ From the src/test/resource folder run the following command
  
 The command starts an asynchronous task and the server sends a response with the location header where the result will be made 
 available to the client.
+
+In the test class a mock server is created to serve the data requested by the transformer on behalf of the client.
