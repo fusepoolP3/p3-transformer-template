@@ -92,7 +92,7 @@ public class TransformerTest {
 		transformerServerPort = findFreePort();
         transformerBaseUri = "http://localhost:" + transformerServerPort + "/";
         RestAssured.baseURI = transformerBaseUri;
-        TransformerServer server = new TransformerServer(transformerServerPort);
+        TransformerServer server = new TransformerServer(transformerServerPort, false);
         server.start(new TemplateTransformerFactory());
     
 	}
