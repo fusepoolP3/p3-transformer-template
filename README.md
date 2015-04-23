@@ -1,4 +1,4 @@
-Fusepool P3 Template Transformer
+Fusepool P3 Transformer Template 
 ============================
 
 This template provides a starting code to make it easy to develop and test a transformer for the Fusepool P3 platform.
