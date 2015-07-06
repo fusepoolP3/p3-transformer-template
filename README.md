@@ -1,4 +1,4 @@
-# Dictionary Matcher Transformer [![Build Status](https://travis-ci.org/fusepoolP3/p3-transformer-template.svg)](https://travis-ci.org/fusepoolP3/p3-transformer-template/)
+# Transformer Template [![Build Status](https://travis-ci.org/fusepoolP3/p3-transformer-template.svg)](https://travis-ci.org/fusepoolP3/p3-transformer-template/)
 
 This template provides a starting place to make it easy to develop and test a transformer for the Fusepool P3 platform. 
 
