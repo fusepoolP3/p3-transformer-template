@@ -1,5 +1,4 @@
-Fusepool P3 Transformer Template 
-============================
+# Dictionary Matcher Transformer [![Build Status](https://travis-ci.org/fusepoolP3/p3-transformer-template.svg)](https://travis-ci.org/fusepoolP3/p3-transformer-template/)
 
 This template provides a starting code to make it easy to develop and test a transformer for the Fusepool P3 platform.
 A transformer provides a service to transform and enrich a data set sent via HTTP POST by a client. The client can send
